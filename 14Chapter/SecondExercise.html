@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>14.2</title>
+</head>
+<body>
+
+<div id="wrapper">
+	<div data-tabname="one">Tab one</div>
+	<div data-tabname="two">Tab two</div>
+	<div data-tabname="three">Tab three</div>
+</div>
+
+
+<script>
+    function asTabs(node) {
+        const colors = ['lightblue', 'lightgreen', 'aquamarine'];
+				let tabArray = [];
+				for (let i = 0; i < node.childNodes.length; i++) {
+						if (node.childNodes[i].nodeType === document.ELEMENT_NODE) {
+						    node.childNodes[i].className = 'tab-panel';
+						    node.childNodes[i].style.display = 'none';
+						    tabArray.push(node.childNodes[i]);
+						}
+				}
+				
+				//Sets default on page load
+				tabArray[0].style.display = 'block';
+				tabArray[0].style.backgroundColor = colors[0];
+				
+				//Create buttons and adds them to a container
+				const tabContainer = document.createElement('div');
+				tabArray.forEach((tab, i) => {
+				    //Create a button, set a class name, set the inner text
+				    const tabButton = document.createElement('button');
+				    tabButton.className = 'tab-button';
+				    tabButton.style.backgroundColor = colors[i];
+				    tabButton.textContent = tab.getAttribute('data-tabname').toUpperCase();
+				    
+				    tabButton.addEventListener('click', () => activateTab(i));
+				    
+						tabContainer.appendChild(tabButton);
+				});
+				//Adds button container to the node
+				node.insertBefore(tabContainer, node.firstChild);
+				
+				//Sets active and inactive panels depending on button click
+        function activateTab(clickedButtonIndex) {
+						tabArray.forEach((panel, panelIndex) => {
+						    
+						    if (clickedButtonIndex === panelIndex) {
+						        panel.style.display = 'block';
+						        panel.style.backgroundColor = colors[clickedButtonIndex];
+								} else {
+						        panel.style.display = 'none';
+								}
+								
+						})
+        }
+    }
+    
+    asTabs(document.querySelector("#wrapper"));
+</script>
+
+
+
+
+
+<style>
+	
+	.tab-panel {
+		width: 200px;
+		height: 150px;
+	}
+
+</style>
+
+</body>
+</html>

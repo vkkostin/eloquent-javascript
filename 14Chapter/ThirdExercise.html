@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>14.3</title>
+</head>
+	<body>
+	</body>
+
+	<script>
+		function setStyles(element, properties) {
+				for (let prop in properties) {
+				    element.style[prop] = properties[prop];
+				}
+		}
+		
+		document.body.addEventListener('mousemove', function(event) {
+			const div = document.createElement('div');
+			setStyles(div, {
+			    width: '5px',
+					height: '5px',
+					backgroundColor: 'red',
+					position: 'absolute',
+					top: `${event.clientY}px`,
+					left: `${event.clientX}px`,
+			});
+			document.body.appendChild(div);
+			setTimeout(() => document.body.removeChild(div), 250);
+		});
+	</script>
+
+	<style>
+		body {
+			height: 500px;
+			margin: 0;
+		}
+	</style>
+
+</html>

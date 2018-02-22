@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>14.1</title>
+</head>
+<body>
+	<form id="form">
+		<input id="input" placeholder="Search" type="text">
+	</form>
+</body>
+
+<script>
+	const forbiddenLetters = [113, 119, 120];
+	const input = document.getElementById('input');
+	input.addEventListener('keypress', event => {
+	    if (forbiddenLetters.indexOf(event.keyCode) !== -1) {
+	        event.preventDefault();
+			}
+	});
+</script>
+
+<style>
+	#form {
+		margin: 50px 0 0 50px;
+	}
+	
+	#input {
+		border: 2px solid grey;
+		height: 40px;
+		width: 200px;
+		font-size: 2em;
+	}
+</style>
+
+</html>
